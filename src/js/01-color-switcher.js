@@ -3,22 +3,24 @@ const stopButton = document.querySelector('[data-stop]');
 const body = document.querySelector('body');
 let timer = null;
 
+const DISABLED_ATTR = 'disabled';
+
 function getRandomHexColor() {
-    return `#${Math.floor(Math.random() * 16777215)
-        .toString(16)
-        .padStart(6, '0')}`;
+  return `#${Math.floor(Math.random() * 16777215)
+    .toString(16)
+    .padStart(6, '0')}`;
 }
 
 startButton.addEventListener('click', () => {
- timer = setInterval(() => {
+  timer = setInterval(() => {
     body.style.background = getRandomHexColor();
   }, 1000);
-  startButton.setAttribute('disabled', 'disabled');
-  stopButton.removeAttribute('disabled');
+  startButton.setAttribute(DISABLED_ATTR, DISABLED_ATTR);
+  stopButton.removeAttribute(DISABLED_ATTR);
 });
 
 stopButton.addEventListener('click', () => {
- startButton.removeAttribute('disabled');
-  stopButton.setAttribute('disabled', 'disabled');
+  startButton.removeAttribute(DISABLED_ATTR);
+  stopButton.setAttribute(DISABLED_ATTR, DISABLED_ATTR);
   clearInterval(timer);
 });
