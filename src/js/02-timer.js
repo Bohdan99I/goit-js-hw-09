@@ -17,16 +17,19 @@ const onPress = () => {
   countdownInterval = setInterval(() => {
     const currentDate = new Date(input.value);
     const time = currentDate - Date.now();
+
+    if (time <= 0) {
+      clearInterval(countdownInterval);
+      return;
+    }
+
     const convertTime = convertMs(time);
     updateClockFace(convertTime);
-
-    if (time <= 1000) {
-      clearInterval(countdownInterval);
-    }
   }, 1000);
 
   startButton.setAttribute('disabled', 'disabled');
 };
+
 
 const options = {
   isActive: false,
