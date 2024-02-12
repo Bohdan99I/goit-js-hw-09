@@ -22,8 +22,24 @@ function onSubmit(event) {
   event.preventDefault();
   const { delay, step, amount } = event.currentTarget.elements;
 
-  for (let i = 0, position = 1; i < amount.value; i += 1, position += 1) {
-    const currentDelay = Number(delay.value) + step.value * i;
+  const validatedDelay = Number(delay.value);
+  const validatedStep = Number(step.value);
+  const validatedAmount = Number(amount.value);
+
+  if (
+    isNaN(validatedDelay) ||
+    isNaN(validatedStep) ||
+    isNaN(validatedAmount) ||
+    validatedDelay <= 0 ||
+    validatedStep <= 0 ||
+    validatedAmount <= 0
+  ) {
+    Notiflix.Notify.failure('Please enter valid positive numbers');
+    return;
+  }
+
+  for (let i = 0, position = 1; i < validatedAmount; i += 1, position += 1) {
+    const currentDelay = validatedDelay + validatedStep * i;
 
     createPromise(position, currentDelay)
       .then(({ position, delay }) => {
