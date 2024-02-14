@@ -1,6 +1,7 @@
 const startButton = document.querySelector('[data-start]');
 const stopButton = document.querySelector('[data-stop]');
 const body = document.querySelector('body');
+
 let timer = null;
 
 const DISABLED_ATTR = 'disabled';
@@ -15,6 +16,7 @@ startButton.addEventListener('click', () => {
   timer = setInterval(() => {
     body.style.background = getRandomHexColor();
   }, 1000);
+  
   startButton.setAttribute(DISABLED_ATTR, DISABLED_ATTR);
   stopButton.removeAttribute(DISABLED_ATTR);
 });
